@@ -1,0 +1,65 @@
+---
+import { Image } from "astro:assets";
+import Leopard from "@assets/icons/animals/leopard.svg";
+import Elephant from "@assets/icons/animals/elephant.svg";
+import Dolphin from "@assets/icons/animals/dolphin.svg";
+---
+
+<section
+  aria-label="animal picker"
+  class="flex flex-col gap-8 sm:gap-10 items-center my-8 sm:my-12"
+>
+  <h2
+    class="text-4xl sm:text-5xl font-medium text-red-brown font-title text-balance"
+  >
+    Choose your animal...
+  </h2>
+
+  <ul class="flex gap-6 sm:gap-8">
+    <li class="flex flex-col items-center text-base sm:text-lg font-medium">
+      <a href="/story/leopard" class="hover:animate-bouncy">
+        <Image
+          class="bg-sand p-2 rounded-full mb-2"
+          src={Leopard}
+          width={64}
+          height={64}
+          alt="leopard"
+          loading="eager"
+        />
+        <span>Leopard</span>
+      </a>
+    </li>
+    <li class="flex flex-col items-center text-base sm:text-lg font-medium">
+      <a href="/story/elephant" class="hover:animate-bouncy">
+        <Image
+          class="bg-sand p-2 rounded-full mb-2"
+          src={Elephant}
+          width={64}
+          height={64}
+          alt="elephant"
+          loading="eager"
+        />
+        <span>Elephant</span>
+      </a>
+    </li>
+    <li class="flex flex-col items-center text-base sm:text-lg font-medium">
+      <a href="/story/dolphin" class="hover:animate-bouncy">
+        <Image
+          class="bg-sand p-2 rounded-full mb-2"
+          src={Dolphin}
+          width={64}
+          height={64}
+          alt="elephant"
+          loading="eager"
+        />
+        <span class="mt-4">Dolphin</span>
+      </a>
+    </li>
+  </ul>
+
+  <p
+    class="text-4xl sm:text-5xl font-medium text-red-brown font-title text-balance"
+  >
+    ...and embark on a journey!
+  </p>
+</section>

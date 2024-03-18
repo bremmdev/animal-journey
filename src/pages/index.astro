@@ -1,0 +1,51 @@
+---
+import "../global.css";
+import AnimalPicker from "../components/Story/AnimalPicker.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body class="bg-amber-100">
+    <main class="w-11/12 max-w-7xl mx-auto py-12">
+      <h1
+        class="text-red-brown text-5xl sm:text-7xl text-center font-title sm:mt-8"
+      >
+        Animal Journey
+      </h1>
+      <section class="my-6 sm:my-12">
+        <p
+          class="max-w-4xl w-11/12 mx-auto leading-8 sm:leading-8 text-base sm:text-lg"
+        >
+          Are you ready to embark on a thrilling adventure unlike any other?
+          Join us as we journey through the eyes of some of nature's most
+          <span class="text-red-brown font-bold">fascinating creatures</span>.
+          From the majestic lion roaming the African savanna to the graceful
+          dolphin gliding through the ocean depths, each animal has its own
+          story to tell. In <span class="text-red-brown font-bold"
+            >Animal Journey</span
+          >, you'll not only explore the vast and diverse habitats of these
+          incredible creatures but also gain a <span
+            class="text-red-brown font-bold">deeper understanding</span
+          > of their lives. Discover the challenges they face, the joys they experience,
+          and the unique behaviors that make them truly extraordinary. Through <span
+            class="text-red-brown font-bold">interactive storytelling</span
+          >, you'll step into the paws, wings, or fins of your chosen animal and
+          navigate through different stages of its life. From playful cubs to
+          wise elders, every moment is filled with excitement and discovery. Are
+          you ready to connect with the <span class="text-red-brown font-bold"
+            >natural world
+          </span>in a whole new way? Join us on this unforgettable journey and
+          let the journey begin!
+        </p>
+      </section>
+
+      <AnimalPicker />
+    </main>
+  </body>
+</html>
