@@ -50,3 +50,12 @@ const stories = await getCollection("story");
     ...and embark on a journey!
   </p>
 </section>
+
+<style>
+  section:has(a:hover) a:not(:hover) {
+    transform: scale(0.85) translateY(-1rem);
+    opacity: 0.75;
+    transition: all 0.3s ease-in-out;
+    transition-delay: 0.2s;
+  }
+</style>
