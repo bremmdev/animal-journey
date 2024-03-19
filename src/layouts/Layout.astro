@@ -1,0 +1,26 @@
+---
+import { ViewTransitions } from "astro:transitions";
+const { title } = Astro.props;
+const isFirstStoryOrHome =
+  new URL(Astro.request.url).pathname.includes("meet") ||
+  new URL(Astro.request.url).pathname === "/";
+---
+
+<html lang="en" transition:animate="none">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title || "Animal Journey"}</title>
+    <ViewTransitions />
+  </head>
+  <body class="bg-amber-100">
+    <main
+      class="w-11/12 max-w-7xl mx-auto py-12"
+      transition:animate={isFirstStoryOrHome ? "fade" : "slide"}
+    >
+      <slot />
+    </main>
+  </body>
+</html>

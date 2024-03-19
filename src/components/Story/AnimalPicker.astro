@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
-import Leopard from "@assets/icons/animals/leopard.svg";
-import Elephant from "@assets/icons/animals/elephant.svg";
-import Dolphin from "@assets/icons/animals/dolphin.svg";
+import { getCollection } from "astro:content";
+const animals = await getCollection("animal");
+const stories = await getCollection("story");
 ---
 
 <section
@@ -16,45 +16,32 @@ import Dolphin from "@assets/icons/animals/dolphin.svg";
   </h2>
 
   <ul class="flex gap-6 sm:gap-8">
-    <li class="flex flex-col items-center text-base sm:text-lg font-medium">
-      <a href="/story/leopard" class="hover:animate-bouncy">
-        <Image
-          class="bg-sand p-2 rounded-full mb-2"
-          src={Leopard}
-          width={64}
-          height={64}
-          alt="leopard"
-          loading="eager"
-        />
-        <span>Leopard</span>
-      </a>
-    </li>
-    <li class="flex flex-col items-center text-base sm:text-lg font-medium">
-      <a href="/story/elephant" class="hover:animate-bouncy">
-        <Image
-          class="bg-sand p-2 rounded-full mb-2"
-          src={Elephant}
-          width={64}
-          height={64}
-          alt="elephant"
-          loading="eager"
-        />
-        <span>Elephant</span>
-      </a>
-    </li>
-    <li class="flex flex-col items-center text-base sm:text-lg font-medium">
-      <a href="/story/dolphin" class="hover:animate-bouncy">
-        <Image
-          class="bg-sand p-2 rounded-full mb-2"
-          src={Dolphin}
-          width={64}
-          height={64}
-          alt="elephant"
-          loading="eager"
-        />
-        <span class="mt-4">Dolphin</span>
-      </a>
-    </li>
+    {
+      animals.map((animal) => {
+        const firstStory = stories.find(
+          (story) =>
+            story.data.animal.id === animal.id && story.data.chapter === 1
+        );
+        if (!firstStory) return null;
+        return (
+          <li class="flex flex-col items-center text-base sm:text-lg font-medium">
+            <a href={`/story/${firstStory.slug}`} class="hover:animate-bouncy">
+              <Image
+                class="bg-sand p-2 rounded-full mb-2"
+                src={animal.data.icon}
+                width={64}
+                height={64}
+                alt={animal.data.name}
+                loading="eager"
+              />
+              <span class="inline-block w-full text-center">
+                {animal.data.name}
+              </span>
+            </a>
+          </li>
+        );
+      })
+    }
   </ul>
 
   <p

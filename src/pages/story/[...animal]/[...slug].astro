@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import AnimalStory from "@components/Story/AnimalStory.astro";
+import Layout from "@layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const [animals, stories] = await Promise.all([
+    getCollection("animal"),
+    getCollection("story"),
+  ]);
+  const animalPaths = animals.map((animalEntry) => ({
+    params: {
+      animal: animalEntry.id,
+    },
+    props: { animalEntry },
+  }));
+
+  const storyPaths = stories.map((storyEntry) => ({
+    params: {
+      animal: storyEntry.data.animal.id,
+      slug: storyEntry.slug.split("/").pop(),
+    },
+    props: {
+      storyEntry,
+    },
+  }));
+
+  return [...animalPaths, ...storyPaths];
+}
+
+const { animalEntry, storyEntry } = Astro.props;
+
+//differentiate between animal and story page
+const isAnimalPage = typeof storyEntry === "undefined";
+---
+
+<Layout>
+  {
+    isAnimalPage ? (
+      <h1>Animal page for {animalEntry?.data?.name}</h1>
+    ) : (
+      <AnimalStory storyEntry={storyEntry} />
+    )
+  }
+</Layout>
