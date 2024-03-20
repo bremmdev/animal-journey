@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import { type CollectionEntry, getEntries } from "astro:content";
 import { Image } from "astro:assets";
-import NextPageIcon from "@assets/icons/next-page.svg";
+import Chevron from "@assets/icons/chevron.svg";
 
 interface Props {
   storyEntry: CollectionEntry<"story">;
@@ -20,14 +20,57 @@ const nextStory = (
     );
   })
 )[0];
+
+const previousStory = (
+  await getCollection("story", ({ data }) => {
+    return (
+      data.animal.id === storyEntry.data.animal.id &&
+      data.chapter === storyEntry.data.chapter - 1
+    );
+  })
+)[0];
+
+const continueText = !nextStory ? "...the end" : "Continue reading";
 ---
 
 <Content />
 
-{
-  nextStory && (
-    <a href={`/story/${nextStory.slug}`}>
-      <Image src={NextPageIcon} width={64} height={64} alt="next page" />
-    </a>
-  )
-}
+<nav aria-label="story navigation" class="bg-[#e5dbb3] 100 p-8 my-8 rounded-lg">
+  <h2 class="text-center text-red-brown font-bold text-lg mb-4">
+    {continueText}
+  </h2>
+  <ul class="flex justify-center gap-4">
+    {
+      previousStory && (
+        <li>
+          <a
+            href={`/story/${previousStory.slug}`}
+            class="border-b border-b-red-brown border-spacing-4 text-red-brown font-medium hover:opacity-50"
+            rel="prev"
+          >
+            <Image
+              src={Chevron}
+              alt=""
+              class="inline-block w-4 h-4 rotate-180"
+            />
+            Previous story
+          </a>
+        </li>
+      )
+    }
+    {
+      nextStory && (
+        <li>
+          <a
+            href={`/story/${nextStory.slug}`}
+            class="border-b border-b-red-brown border-spacing-4 text-red-brown font-medium hover:opacity-50"
+            rel="next"
+          >
+            Next story
+            <Image src={Chevron} alt="" class="inline-block w-4 h-4" />
+          </a>
+        </li>
+      )
+    }
+  </ul>
+</nav>
