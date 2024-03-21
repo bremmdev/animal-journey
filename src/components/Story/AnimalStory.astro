@@ -1,14 +1,17 @@
 ---
 import { getCollection } from "astro:content";
-import { type CollectionEntry, getEntries } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import Chevron from "@assets/icons/chevron.svg";
+import Prose from "@components/Story/Prose.astro";
+import StoryHeader from "@components/Story/StoryHeader.astro";
 
 interface Props {
   storyEntry: CollectionEntry<"story">;
+  animalEntry: CollectionEntry<"animal">;
 }
 
-const { storyEntry } = Astro.props as Props;
+const { storyEntry, animalEntry } = Astro.props as Props;
 
 const { Content, headings } = await storyEntry.render();
 
@@ -33,9 +36,12 @@ const previousStory = (
 const continueText = !nextStory ? "...the end" : "Continue reading";
 ---
 
-<Content />
+<StoryHeader animal={animalEntry} story={storyEntry} />
 
-<nav aria-label="story navigation" class="bg-[#e5dbb3] 100 p-8 my-8 rounded-lg">
+<Prose>
+  <Content />
+</Prose>
+<nav aria-label="story navigation" class="bg-pale-brown 100 p-8 my-8 rounded-lg">
   <h2 class="text-center text-red-brown font-bold text-lg mb-4">
     {continueText}
   </h2>

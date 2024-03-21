@@ -1,0 +1,39 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+
+interface Props {
+  story: CollectionEntry<"story">;
+  animal: CollectionEntry<"animal">;
+}
+
+const { story, animal } = Astro.props;
+
+const headerBg = {
+  land: "bg-bright-brown",
+  sea: "bg-bright-blue",
+  air: "bg-bright-sky",
+};
+---
+
+<header
+  class={`${headerBg[animal.data.habitat]} font-medium text-slate-50 rounded-lg p-6 mb-8 flex flex-col items-center`}
+>
+  <h1
+    aria-label={`${animal.data.name} Chapter ${story.data.chapter}`}
+    class="text-3xl"
+  >
+    Chapter {story.data.chapter}
+  </h1>
+  <Image
+    class="bg-pale-brown p-2 rounded-full mt-4 mb-2"
+    src={animal.data.icon}
+    width={64}
+    height={64}
+    alt={animal.data.name}
+    loading="eager"
+  />
+
+  <h2 class="capitalize text-2xl">{animal.data.name}</h2>
+  <span class="text-base uppercase">{animal.data.binomial}</span>
+</header>

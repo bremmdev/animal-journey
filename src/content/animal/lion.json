@@ -1,4 +1,6 @@
 {
   "name": "lion",
+  "binomial": "Panthera leo",
+  "habitat": "land",
   "icon": "./icons/lion.svg"
 }

@@ -1,4 +1,6 @@
 {
   "name": "elephant",
+  "binomial": "Delphinus delphis",
+  "habitat": "land",
   "icon": "./icons/elephant.svg"
 }

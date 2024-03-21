@@ -10,7 +10,11 @@ export default {
       },
       colors: {
         "red-brown": "#6e1005",
-        sand: "#dcc9a3",
+        "bright-brown": "#99533F",
+        "bright-blue": "#0047ab",
+        "bright-sky": "#214761",
+        "pale-brown": "#ead3ac",
+        "pale-blue": "#c4d0ff",
       },
       keyframes: {
         bouncy: {
@@ -27,7 +31,10 @@ export default {
       animation: {
         bouncy: "bouncy 0.5s ease-in-out infinite",
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

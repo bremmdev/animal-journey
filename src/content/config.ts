@@ -5,6 +5,8 @@ const animal = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string(),
+      binomial: z.string(),
+      habitat: z.enum(["land", "sea", "air"]),
       icon: image(),
     }),
 });

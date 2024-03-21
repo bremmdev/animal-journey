@@ -22,6 +22,9 @@ export async function getStaticPaths() {
     },
     props: {
       storyEntry,
+      animalEntry: animals.find(
+        (animal) => animal.id === storyEntry.data.animal.id
+      ),
     },
   }));
 
@@ -39,7 +42,7 @@ const isAnimalPage = typeof storyEntry === "undefined";
     isAnimalPage ? (
       <h1>Animal page for {animalEntry?.data?.name}</h1>
     ) : (
-      <AnimalStory storyEntry={storyEntry} />
+      <AnimalStory storyEntry={storyEntry} animalEntry={animalEntry!} />
     )
   }
 </Layout>

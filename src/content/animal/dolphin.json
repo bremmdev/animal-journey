@@ -1,4 +1,6 @@
 {
   "name": "dolphin",
+  "binomial": "Delphinus delphis",
+  "habitat": "sea",
   "icon": "./icons/dolphin.svg"
 }
