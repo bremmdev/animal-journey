@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import Chevron from "@assets/icons/chevron.svg";
 import Prose from "@components/Story/Prose.astro";
 import StoryHeader from "@components/Story/StoryHeader.astro";
+import { getThemeColors } from "@lib/theme";
 
 interface Props {
   storyEntry: CollectionEntry<"story">;
@@ -33,6 +34,8 @@ const previousStory = (
   })
 )[0];
 
+const themeColors = getThemeColors(animalEntry.data.habitat);
+
 const continueText = !nextStory ? "...the end" : "Continue reading";
 ---
 
@@ -41,8 +44,8 @@ const continueText = !nextStory ? "...the end" : "Continue reading";
 <Prose>
   <Content />
 </Prose>
-<nav aria-label="story navigation" class="bg-pale-brown 100 p-8 my-8 rounded-lg">
-  <h2 class="text-center text-red-brown font-bold text-lg mb-4">
+<nav aria-label="chapter navigation" class="p-8 my-12 rounded-lg">
+  <h2 class={`text-center text-${themeColors.bright} font-bold text-lg mb-4`}>
     {continueText}
   </h2>
   <ul class="flex justify-center gap-4">
@@ -51,7 +54,7 @@ const continueText = !nextStory ? "...the end" : "Continue reading";
         <li>
           <a
             href={`/story/${previousStory.slug}`}
-            class="border-b border-b-red-brown border-spacing-4 text-red-brown font-medium hover:opacity-50"
+            class={`border-b border-b-${themeColors.bright} border-spacing-4 text-${themeColors.bright} font-medium hover:opacity-50`}
             rel="prev"
           >
             <Image
@@ -59,7 +62,7 @@ const continueText = !nextStory ? "...the end" : "Continue reading";
               alt=""
               class="inline-block w-4 h-4 rotate-180"
             />
-            Previous story
+            Previous chapter
           </a>
         </li>
       )
@@ -69,10 +72,10 @@ const continueText = !nextStory ? "...the end" : "Continue reading";
         <li>
           <a
             href={`/story/${nextStory.slug}`}
-            class="border-b border-b-red-brown border-spacing-4 text-red-brown font-medium hover:opacity-50"
+            class={`border-b border-b-${themeColors.bright} border-spacing-4 text-${themeColors.bright} font-medium hover:opacity-50`}
             rel="next"
           >
-            Next story
+            Next chapter
             <Image src={Chevron} alt="" class="inline-block w-4 h-4" />
           </a>
         </li>

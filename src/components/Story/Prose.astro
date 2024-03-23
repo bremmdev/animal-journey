@@ -1,9 +1,16 @@
 ---
+import { getThemeColors } from "@lib/theme";
+import { getCollection } from "astro:content";
 
+const animals = await getCollection("animal");
+const selectedAnimal = animals.find((animal) => Astro.url.pathname.includes(animal.id));
+
+
+const themeColors = getThemeColors(selectedAnimal?.data.habitat);
 ---
 
 <article
-  class="prose-h3:font-bold prose-h3:text-xl prose-h3:my-4 prose-h3:text-red-brown prose-p:leading-8"
+  class={`flex flex-col items-center gap-6 selection:bg-pale-brown max-w-4xl mx-auto prose-h3:font-bold prose-h3:text-xl prose-h3:text-${themeColors.bright} prose-p:leading-8 prose-img:w-full prose-img:rounded-lg prose-img:my-2 prose-ul:list-disc prose-ul:pl-12 prose-ul:-mt-4 prose-ul:leading-8`}
 >
   <slot />
 </article>
