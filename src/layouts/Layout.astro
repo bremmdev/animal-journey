@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { ViewTransitions } from "astro:transitions";
-import { getThemeColors } from "@lib/theme.ts";
+import { getBackgroundColor } from "@lib/theme.ts";
 
 const { title } = Astro.props;
 
@@ -10,7 +10,7 @@ const selectedAnimal = animals.find((animal) =>
   Astro.request.url.includes(animal.id)
 );
 
-const themeColors = getThemeColors(selectedAnimal?.data.habitat);
+const backgroundColor = getBackgroundColor(selectedAnimal?.data.habitat);
 ---
 
 <html lang="en" transition:animate="fade">
@@ -22,7 +22,7 @@ const themeColors = getThemeColors(selectedAnimal?.data.habitat);
     <title>{title || "Animal Journey"}</title>
     <ViewTransitions />
   </head>
-  <body class={`bg-${themeColors.pale} text-slate-950`}>
+  <body class={`${backgroundColor} text-slate-950`}>
     <main class="w-11/12 max-w-7xl mx-auto py-12">
       <slot />
     </main>
