@@ -1,11 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import { type CollectionEntry } from "astro:content";
-import { Image } from "astro:assets";
-import Chevron from "@assets/icons/chevron.svg";
 import Prose from "@components/Story/Prose.astro";
 import StoryHeader from "@components/Story/StoryHeader.astro";
-import { getPrimaryTextColor, getUnderlineColor } from "@lib/theme";
+import { getThemeColors } from "@lib/theme";
 
 interface Props {
   storyEntry: CollectionEntry<"story">;
@@ -34,8 +32,7 @@ const previousStory = (
   })
 )[0];
 
-const primaryTextColor = getPrimaryTextColor(animalEntry.data.habitat);
-const underlineColor = getUnderlineColor(animalEntry.data.habitat);
+const themeColors = getThemeColors(animalEntry.data.habitat);
 
 const continueText = !nextStory ? "...the end" : "Continue reading";
 ---
@@ -45,8 +42,11 @@ const continueText = !nextStory ? "...the end" : "Continue reading";
 <Prose>
   <Content />
 </Prose>
-<nav aria-label="chapter navigation" class="p-8 my-12 rounded-lg">
-  <h2 class={`text-center ${primaryTextColor} font-bold text-lg mb-4`}>
+<nav
+  aria-label="chapter navigation"
+  class={`p-8 my-12 rounded-lg ${themeColors.fadedBackground}`}
+>
+  <h2 class={`text-center ${themeColors.primaryText} font-bold text-lg mb-4`}>
     {continueText}
   </h2>
   <ul class="flex justify-center gap-4">
@@ -55,14 +55,22 @@ const continueText = !nextStory ? "...the end" : "Continue reading";
         <li>
           <a
             href={`/story/${previousStory.slug}`}
-            class={`border-b ${underlineColor} border-spacing-4 ${primaryTextColor} font-medium hover:opacity-50`}
+            class={`border-b ${themeColors.underline} border-spacing-4 ${themeColors.primaryText} font-medium hover:opacity-50 flex items-center`}
             rel="prev"
           >
-            <Image
-              src={Chevron}
-              alt=""
-              class="inline-block w-4 h-4 rotate-180"
-            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-5 w-5 rotate-180"
+            >
+              <path stroke="currentColor" d="m9 18 6-6-6-6" />
+            </svg>
             Previous chapter
           </a>
         </li>
@@ -73,11 +81,23 @@ const continueText = !nextStory ? "...the end" : "Continue reading";
         <li>
           <a
             href={`/story/${nextStory.slug}`}
-            class={`border-b ${underlineColor} border-spacing-4 ${primaryTextColor} font-medium hover:opacity-50`}
+            class={`border-b ${themeColors.underline} border-spacing-4 ${themeColors.primaryText} font-medium hover:opacity-50 flex items-center`}
             rel="next"
           >
             Next chapter
-            <Image src={Chevron} alt="" class="inline-block w-4 h-4" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-5 w-5"
+            >
+              <path stroke="currentColor" d="m9 18 6-6-6-6" />
+            </svg>
           </a>
         </li>
       )

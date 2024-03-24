@@ -9,12 +9,15 @@ export default {
         title: ["Sacramento", ...defaultTheme.fontFamily.serif],
       },
       colors: {
-        "red-brown": "#6e1005",
+        "primary-brown": "#6e1005",
+        "primary-blue": "#0504aa",
         "bright-brown": "#99533F",
         "bright-blue": "#0047ab",
         "bright-sky": "#214761",
         "pale-brown": "#ead3ac",
         "pale-blue": "#c4d0ff",
+        "faded-amber": "#fee9a6",
+        "faded-blue": "#bfdbfe",
       },
       keyframes: {
         bouncy: {
@@ -33,8 +36,9 @@ export default {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        paws: "url('/paws.svg')",
+        drops: "url('/drops.svg')",
       },
-    
     },
   },
   plugins: [require("@tailwindcss/typography")],

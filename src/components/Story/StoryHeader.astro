@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
+import { getThemeColors } from "@lib/theme";
 
 interface Props {
   story: CollectionEntry<"story">;
@@ -9,15 +10,29 @@ interface Props {
 
 const { story, animal } = Astro.props;
 
-const headerBg = {
-  land: "bg-bright-brown",
-  sea: "bg-bright-blue",
-  air: "bg-bright-sky",
-};
+const themeColors = getThemeColors(animal?.data?.habitat);
+
+let backgroundImage = "bg-paws";
+
+if (animal.data.habitat === "sea") {
+  backgroundImage = "bg-drops";
+}
 ---
 
+<style>
+  header {
+    background-size: 100px;
+    background-position: 0.5rem 0.5rem;
+    background-repeat: no-repeat;
+
+    @media (max-width: 640px) {
+      background-size: 60px;
+    }
+  }
+</style>
+
 <header
-  class={`${headerBg[animal.data.habitat]} font-medium text-slate-50 rounded-lg p-6 mb-8 flex flex-col items-center`}
+  class={`${themeColors.header} ${backgroundImage} font-medium text-slate-50 rounded-lg p-6 mb-8 flex flex-col items-center`}
 >
   <h1
     aria-label={`${animal.data.name} Chapter ${story.data.chapter}`}

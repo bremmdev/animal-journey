@@ -1,35 +1,36 @@
-export const backgroundColors = {
-  land: "bg-amber-100",
-  sea: "bg-blue-100",
-  air: "bg-teal-100",
+// Define a single object containing all color mappings
+export const colorMappings = {
+  land: {
+    background: "bg-amber-100",
+    fadedBackground: "bg-pale-brown",
+    header: "bg-bright-brown",
+    primaryText: "text-primary-brown",
+    proseHeading: "prose-h3:text-primary-brown",
+    underline: "border-b-primary-brown",
+    selection: "selection:bg-pale-brown"
+  },
+  sea: {
+    background: "bg-blue-100",
+    fadedBackground: "bg-faded-blue",
+    header: "bg-bright-blue",
+    primaryText: "text-primary-blue",
+    proseHeading: "prose-h3:text-primary-blue",
+    underline: "border-b-primary-blue",
+    selection: "selection:bg-faded-blue"
+  },
+  //TODO: Add air color mappings
+  air: {
+    background: "bg-teal-100",
+    fadedBackground: "bg-teal-100/50",
+    header: "bg-teal-800",
+    primaryText: "text-teal-800",
+    proseHeading: "prose-h3:text-teal-800",
+    underline: "border-b-teal-800",
+    selection: ""
+  },
 } as const;
 
-export const primaryTextColor = {
-  land: "text-red-brown",
-  sea: "text-bright-blue",
-  air: "text-teal-800",
-} as const;
-
-export const headerColors = {
-  land: "text-bright-brown",
-  sea: "text-bright-blue",
-  air: "text-teal-800",
-} as const;
-
-export const proseHeadings = {
-  land: "prose-h3:text-red-brown",
-  sea: "prose-h3:text-bright-blue",
-  air: "prose-h3:text-teal-800",
-} as const;
-
-export const underlines = {
-  land: "border-b-red-brown",
-  sea: "border-b-bright-blue",
-  air: "border-b-teal-800",
-} as const;
-
-export const getBackgroundColor = (type: keyof typeof backgroundColors = "land") => backgroundColors[type];
-export const getPrimaryTextColor = (type: keyof typeof primaryTextColor = "land") => primaryTextColor[type];
-export const getHeaderColor = (type: keyof typeof headerColors = "land") => headerColors[type];
-export const getProseHeadingColor = (type: keyof typeof proseHeadings = "land") => proseHeadings[type];
-export const getUnderlineColor = (type: keyof typeof underlines = "land") => underlines[type];
+// Function to get all colors for a given type (land, sea, air)
+export const getThemeColors = <T extends keyof typeof colorMappings>(
+  type: T = 'land' as T
+ ): typeof colorMappings[T] => colorMappings[type];

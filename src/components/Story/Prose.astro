@@ -1,16 +1,17 @@
 ---
-import { getProseHeadingColor } from "@lib/theme";
+import { getThemeColors } from "@lib/theme";
 import { getCollection } from "astro:content";
 
 const animals = await getCollection("animal");
-const selectedAnimal = animals.find((animal) => Astro.url.pathname.includes(animal.id));
+const selectedAnimal = animals.find((animal) =>
+  Astro.url.pathname.includes(animal.id)
+);
 
-
-const proseHeadingColor = getProseHeadingColor(selectedAnimal?.data.habitat);
+const themeColors = getThemeColors(selectedAnimal?.data.habitat);
 ---
 
 <article
-  class={`flex flex-col items-center gap-6 selection:bg-pale-brown max-w-4xl mx-auto prose-h3:font-bold prose-h3:text-xl ${proseHeadingColor} prose-p:leading-8 prose-img:w-full prose-img:rounded-lg prose-img:my-2 prose-ul:list-disc prose-ul:pl-12 prose-ul:-mt-4 prose-ul:leading-8`}
+  class={`flex flex-col items-center gap-6 ${themeColors.selection} max-w-4xl mx-auto prose-h3:font-bold prose-h3:text-xl ${themeColors.proseHeading} prose-p:leading-8 prose-img:w-full prose-img:rounded-lg prose-img:my-2 prose-ul:list-disc prose-ul:pl-12 prose-ul:-mt-4 prose-ul:leading-8`}
 >
   <slot />
 </article>
